@@ -8,8 +8,15 @@ from urllib.parse import unquote
 import json
 
 def urlToJson(url):
-	path = encodedUrl.split("?")[0]
-	decodedBody = unquote(encodedUrl.split("?")[1])
+	split = encodedUrl.split("?")
+
+	# If the user just submits a payload with no URL (such as from fiddler) just make body
+	if len(split) > 1:
+		path = encodedUrl.split("?")[0]
+		decodedBody = unquote(encodedUrl.split("?")[1])
+	else:
+		path = 'Not Found'
+		decodedBody = unquote(encodedUrl)
 
 	obj = {}
 	obj['path'] = path
